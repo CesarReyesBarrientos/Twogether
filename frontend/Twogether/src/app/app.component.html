@@ -1,0 +1,18 @@
+<h1>Estado de la base de datos</h1>
+<p>{{ msg }}</p>
+<ul>
+  <li *ngFor="let user of users">
+    {{ user.nombre }} - {{ user.email }}
+  </li>
+</ul>
+
+<form (ngSubmit)="addUser($event)">
+
+    <input type="text" placeholder="Nombre" [(ngModel)]="this.nombre" name="nombre" required>
+    <input type="text" placeholder="Email" [(ngModel)]="this.email" name="email" required>
+
+    <button type="submit" >Agregar Usuario</button>
+
+</form>
+
+<router-outlet></router-outlet>
