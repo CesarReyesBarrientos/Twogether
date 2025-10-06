@@ -49,7 +49,6 @@ export class App {
     if (event) {
       event.preventDefault();
     }
-    console.log('User added:', this.nombre, this.email, this.genero, this.password);
 
     // Validar datos obligatorios
     if (!this.nombre || !this.email || !this.password) {
@@ -60,25 +59,29 @@ export class App {
     // Llamada al servicio para agregar usuario
     this.api.addUser(this.nombre, this.email, this.fotoPerfil, this.password, this.genero).subscribe({
       next: (response) => {
-        console.log('User added:', response);
-      },
-      error: (error) => {
-        if (error.status === 400) {
-          switch (error.error.message) {
+        console.log(response); // success: false, error: 'FDO' | 'FEI' | 'EEU' | 'FCP'
+      
+        if (!response.success) {
+          const code = response.error;
+          switch (code) {
             case 'FEI':
-              console.log('Formato de email inválido.');
+              alert('Formato de email inválido.');
               break;
             case 'EEU':
-              console.log('El email ya está en uso.');
+              alert('El email ya está en uso.');
               break;
             case 'FDO':
-              console.log('Faltan datos obligatorios.');
+              alert('Faltan datos obligatorios.');
+              break;
+            case 'FCP':
+              alert('La contraseña es demasiado corta.');
               break;
             default:
-              console.log('Error desconocido.');
+              console.log('Error desconocido.', response.error);
           }
+        } else {
+          console.log('Usuario agregado exitosamente.', response); // success: true, data: ..., message: UCE
         }
-        console.error('Error adding user:', error);
       }
     });
   }
