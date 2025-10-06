@@ -17,25 +17,25 @@ const userController = {
 
             // 2.- Validar datos obligatorios - para probar desde postman   
             if (!nombre || !email || !password) {
-                return res.status(400).json({ error: 'FDO' });
+                return res.status(200).json({ success: false, error: 'FDO' });
             }
 
             // 3.- Validar formato de email - para probrar desde postman
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailPattern.test(email)) {
-                return res.status(400).json({ error: 'FEI' });
+                return res.status(200).json({ success: false, error: 'FEI' });
             }
 
             // 4.- Verificar si el email ya existe en la base de datos
             const existingUsers = await userModel.getAllUsers();
             const emailExists = existingUsers.some(user => user.email === email);
             if (emailExists) {
-                return res.status(400).json({ error: 'EEU' });
+                return res.status(200).json({ success: false, error: 'EEU' });
             }
 
             // 5.- Comprobar longitud mínima de la contraseña
             if (password.length < 8) {
-                return res.status(400).json({ error: 'FCP' });
+                return res.status(200).json({ success: false, error: 'FCP' });
             }
 
             // 6.- Crear el nuevo usuario en la base de datos
