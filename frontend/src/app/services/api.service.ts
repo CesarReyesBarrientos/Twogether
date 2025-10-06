@@ -18,8 +18,8 @@ export class Api {
     return this.http.get(`${this.baseUrl}/getAllUsers`);
   }
 
-  addUser(nombre: string, email: string): Observable<any> {
-    const body = { nombre, email };
+  addUser(nombre: string, email: string, fotoPerfil: string, password: string, genero: string): Observable<any> {
+    const body = { nombre, email, fotoPerfil, password, genero };
     return this.http.post(`${this.baseUrl}/addUser`, body);
   }
 }

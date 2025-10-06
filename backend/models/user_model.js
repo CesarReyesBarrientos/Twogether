@@ -9,6 +9,20 @@ const userModel = {
         const [rows] = await db.connection.execute(query);
         return rows;
     },
+    
+    // Agregar un nuevo usuario a la tabla Usuario
+    addUser: async (userData) => {
+        const { nombre, email, password, genero, fotoPerfil } = userData;
+
+        // Realizar el Query de inserción
+        const query = `
+        INSERT INTO usuario (nombre, email, password, genero, foto_perfil, fecha_registro) 
+        VALUES (?, ?, ?, ?, ?, NOW())
+        `;
+
+        const [result] = await db.connection.execute(query, [nombre, email, password, genero, fotoPerfil]);
+        return result;
+    },
 
     // TODAS LAS FUNCIONES POSIBLES SOBRE LA TABLA USUARIO
 };

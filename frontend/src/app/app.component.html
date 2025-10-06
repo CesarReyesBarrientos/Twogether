@@ -1,0 +1,27 @@
+<h1>Estado de la base de datos</h1>
+<p>{{ msg }}</p>
+<ul>
+  <li *ngFor="let user of users">
+    {{ user.nombre }} - {{ user.email }}
+  </li>
+</ul>
+
+<form (ngSubmit)="addUser($event)">
+
+    <input type="text" placeholder="Nombre" [(ngModel)]="this.nombre" name="nombre" required> <br>
+    <input type="email" placeholder="Email" [(ngModel)]="this.email" name="email" required> <br>
+    <!-- <input type="text" placeholder="Foto de Perfil" [(ngModel)]="this.fotoPerfil" name="fotoPerfil" required> -->
+    <input type="password" placeholder="Password" [(ngModel)]="this.password" name="password" required> <br>
+    <!-- Comprobar contraseña: <input type="password" placeholder="Password" [(ngModel)]="this.password" name="password" required> -->
+     <select [(ngModel)]="this.genero" name="genero" required>
+        <option value="" disabled selected>Selecciona tu género</option>
+        <option value="M">Masculino</option>
+        <option value="F">Femenino</option>
+        <option value="O">Otro</option>
+    </select><br>
+
+    <button type="submit" >Agregar Usuario</button>
+
+</form>
+
+<router-outlet></router-outlet>

@@ -5,5 +5,6 @@ const userController = require('../controllers/user_controller');
 
 //Rutas para Usuarios
 router.get('/getAllUsers', userController.getAllUsers); // Obtener todos los usuarios
+router.post('/addUser', userController.addUser); // Agregar un nuevo usuario
 
 module.exports = router;
